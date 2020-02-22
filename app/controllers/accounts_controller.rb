@@ -5,11 +5,16 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.create(account_params)
-    sign_in(@account.owner)
-    flash[:notice] = "Your account has been created."
+    @account = Account.new(account_params)
 
-    redirect_to root_url(subdomain: @account.subdomain)
+    if @account.save
+      sign_in(@account.owner)
+      flash[:notice] = "Your account has been created."
+      redirect_to root_url(subdomain: @account.subdomain)
+    else
+      flash.now[:alert] = "Sorry, your account could not be created."
+      render :new
+    end
   end
 
   private
