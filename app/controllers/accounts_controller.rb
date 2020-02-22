@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
     sign_in(@account.owner)
     flash[:notice] = "Your account has been created."
 
-    redirect_to root_url
+    redirect_to root_url(subdomain: @account.subdomain)
   end
 
   private
@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
   def account_params
     params
       .require(:account)
-      .permit(:name,
+      .permit(:name, :subdomain,
               owner_attributes: %i[email password passworrd_confirmation])
   end
 
