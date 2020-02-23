@@ -5,6 +5,7 @@ ruby '2.3.3'
 gem 'rails', '~> 5.0'
 gem 'pg'
 
+gem 'apartment'
 gem 'devise', '4.1.1'
 gem 'sidekiq', '4.1.2'
 gem 'redcarpet'

@@ -39,6 +39,23 @@ RSpec.configure do |config|
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
+      Apartment::Tenant.reset
+
+      connection = ActiveRecord::Base.connection.raw_connection
+      schemas = connection.query(%Q{
+        SELECT
+          'drop schema "' || nspname || '" cascade;'
+        FROM
+          pg_namespace
+        WHERE
+          nspname != 'public' AND
+          nspname NOT LIKE 'pg_%' AND
+          nspname != 'information_schema';
+      })
+
+      schemas.each do |query|
+        connection.query(query.values.first)
+      end
     end
   end
 

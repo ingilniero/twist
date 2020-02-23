@@ -1,9 +1,9 @@
 <p>
-  You you have been invitated to join the <%= @invitation.account.name %> acount on Twist.
+  You you have been invitated to join the <%= @account.name %> acount on Twist.
 </p>
 
 <p>
-  <% accept_url = accept_invitation_url(@invitation, subdomain: @invitation.account.subdomain) %>
+  <% accept_url = accept_invitation_url(@invitation, subdomain: @account.subdomain) %>
   <%= link_to "Accept Invitation", accept_url %>
 </p>
 
