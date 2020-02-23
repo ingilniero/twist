@@ -4,6 +4,7 @@ class Account < ApplicationRecord
 
   validates :subdomain, presence: true, uniqueness: true
 
+  has_many :books
   has_many :memberships
   has_many :users, through: :memberships
   has_many :invitations
